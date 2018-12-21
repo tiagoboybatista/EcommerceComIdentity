@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="container body-content">
+        <!--LOGO-->
+        <div id="logo" class="text-center" style="background-color: rgba(233, 233, 233, 0.781)">
+            <img src="~/img/logo.png" class="rounded" width="5%" alt="">
+        </div>
+        <!--MENU-->
+        <div id="menu" style="width: 100%;">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Categorias
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@string.Format("/home/index")">Tudo</a>
+                                @foreach (var item in ViewBag.Categorias)
+                                {
+                                    <a class="dropdown-item" href="@string.Format("/home/index/{0}", item.Id)">@item.Nome</a>
+                                }
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#">Sobre</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <a href="/checkout" class="btn btn-default" style="margin-right:10px"><img src="~/img/carrinho_compras.png" class="carrinho" /><span class="badge">@ViewBag.Carrinho.TotalItensCarrinho()</span></a>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
+                        @Html.Partial("_LoginPartial")
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <!--CORPO referenciando outra página (Index.asp)-->
+        @RenderBody()
+        <hr />
+
+        <!--RODAPÉ-->
+        <footer>
+            <div class="card w-100 text-center" style="margin: 0 auto">
+                <p>
+                    <b>Site: </b>www.minhascompras.com.br <br>
+                    Fone: 3979-2191<br>
+                    Av. Paulista, 1025 - São Paulo - Brasil
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

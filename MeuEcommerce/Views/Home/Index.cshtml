@@ -1,0 +1,40 @@
+﻿@model MeuEcommerce.Models.HomeIndexViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+         <!--CONTEÚDO DA MINHA PÁGINA INICIAL-->
+
+        <div class="container">
+            <div class="row">
+
+                @if (Model.Produtos.Length == 0)
+                {
+                    <div class="row">
+                        <span>Não há produto</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        @foreach (var item in Model.Produtos)
+                        {
+                            <div class="card divProdutos divProdutos-tamanho">
+                                <img class="card-img-top photoAnuncio" src="@item.Imagem" alt="@item.Nome"/>
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Nome</h5>
+                                    <p class="card-text">@item.Descricao</p>
+                                    <h6 class="card-title"><b>R$ @item.Preco.ToString("N2")</b></h6>
+                                    <a href="/Home/AddItem/@item.Id" class="btn btn-primary center-block">Adicionar</a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
